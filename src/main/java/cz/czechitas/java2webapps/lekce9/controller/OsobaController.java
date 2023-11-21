@@ -52,24 +52,24 @@ public class OsobaController {
   public ModelAndView prijmeni(@ModelAttribute("prijmeni") @Valid @NotBlank String prijmeni, @PageableDefault() Pageable pageable) {
     return new ModelAndView("osoby")
             .addObject("formInclude", "prijmeni.ftlh")
-            //TODO vytvořit a použít správnou metodu pro načtení dat
-            .addObject("osoby", service.seznamOsob(pageable));
+            //TODO vytvořit a použít správnou metodu pro načtení dat - funguje
+            .addObject("osoby", service.seznamDlePrijmeni(prijmeni, pageable));
   }
 
   @GetMapping("/obec")
   public ModelAndView obec(@ModelAttribute("obec") @Valid @NotBlank String obec, @PageableDefault(sort = {"prijmeni", "jmeno"}) Pageable pageable) {
     return new ModelAndView("osoby-s-adresou")
             .addObject("formInclude", "obec.ftlh")
-            //TODO vytvořit a použít správnou metodu pro načtení dat
-            .addObject("osoby", service.seznamOsob(pageable));
+            //TODO vytvořit a použít správnou metodu pro načtení dat - funguje na celý název
+            .addObject("osoby", service.seznamDleObce(obec,pageable));
   }
 
   @GetMapping("/minimalni-vek")
   public ModelAndView minimalniVek(@ModelAttribute("vek") int vek, @PageableDefault(sort = {"prijmeni", "jmeno"}) Pageable pageable) {
     return new ModelAndView("osoby")
             .addObject("formInclude", "minimalni-vek.ftlh")
-            //TODO vytvořit a použít správnou metodu pro načtení dat
-            .addObject("osoby", service.seznamOsob(pageable));
+            //TODO vytvořit a použít správnou metodu pro načtení dat - funguje
+            .addObject("osoby", service.seznamDleMinVeku(vek,pageable));
   }
 
   @ModelAttribute("currentYear")
